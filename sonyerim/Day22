@@ -1,0 +1,97 @@
+// Day22
+
+// 저주의 숫자 3
+class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        
+        for (int i = 0; i < n; i++) {
+            answer++;
+            while (answer % 3 == 0 || String.valueOf(answer).contains("3")) {
+                answer++;
+            }
+        }
+        
+        return answer;
+    }
+}
+
+// 평행
+class Solution {
+    public int solution(int[][] dots) {
+        int answer = 0;
+        
+        float[] inclination = new float[6];
+        int idx = 0;
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = i+1; j < 4; j++) {
+                inclination[idx] = (float)(dots[i][1] - dots[j][1]) / (float)(dots[i][0] - dots[j][0]);
+                idx++;
+            }
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            if (inclination[i] == inclination[5-i]) {
+                answer = 1;
+            }
+        }
+        
+        return answer;
+    }
+}
+
+// 겹치는 선분의 길이
+class Solution {
+    public int solution(int[][] lines) {
+        int answer = 0;
+        
+        int[] arr = new int[201];
+        
+        for (int i = 0; i < lines.length; i++) {
+            for (int j = lines[i][0]+1; j <= lines[i][1]; j++) {
+                arr[j+100]++;
+            }
+        }
+        
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] >= 2) {
+                answer++;
+            }
+        }
+        
+        return answer;
+    }
+}
+
+// 유한소수 판별하기
+class Solution {
+    public int solution(int a, int b) {
+        int answer = 1;
+        int fb = b / GCD(a, b);
+        
+        while (fb != 1) {
+            if (fb % 2 == 0) {
+                fb /= 2;
+            }
+            else if (fb % 5 == 0) {
+                fb /= 5;
+            }
+            else {
+                answer = 2;
+                break;
+            }
+        }
+        
+        return answer;
+    }
+    // 유클리드 호제법
+    private int GCD(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return GCD(b, a % b);
+        }
+    }
+}
+
