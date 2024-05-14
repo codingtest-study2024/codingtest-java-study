@@ -1,0 +1,58 @@
+// Dat25
+
+// 문자열 밀기
+class Solution {
+    public int solution(String A, String B) {
+        int answer = 0;
+        String copy = A;
+
+        for (int i = 0; i < A.length(); i++) {
+            if (copy.equals(B)) {
+                return answer;
+            }
+
+            String a = copy.substring(copy.length() - 1);
+            copy = a + copy.substring(0, copy.length() - 1);
+            answer++;
+        }
+
+        return -1;
+    }
+}
+
+// 종이 자르기
+class Solution {
+    public int solution(int M, int N) {
+        int answer = M * N - 1;
+        return answer;
+    }
+}
+
+// 연속된 수의 합
+class Solution {
+    public int[] solution(int num, int total) {
+        int[] answer = new int[num];
+        int start = (total/num) - ((num - 1)/2);
+        
+        for(int i = 0; i < num; i++) {
+            answer[i] = start;
+            start++;
+        }
+        
+        return answer;
+    }
+}
+
+// 다음에 올 숫자
+class Solution {
+    public int solution(int[] common) {
+        int answer = 0;
+        
+        if((common[1] - common[0]) == (common[2] - common[1]))
+            answer = common[common.length-1] + (common[1] - common[0]);
+        else
+            answer = common[common.length-1] * (common[1] / common[0]);
+        
+        return answer;
+    }
+}
